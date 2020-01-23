@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{this.title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button (click)="listeVillageois()">Villageois</button>
+  <button ion-button (click)="listeBatailles()">Batailles</button>
+  {{description}}
+  <ion-img src="{{image}}" class="item item-image"></ion-img>
+  <h5>Films</h5>
+  <ul>
+    <li *ngFor="let film of films">
+      Titre :
+      <a href="#"
+         (click)="getDetails(film)"
+         [textContent]="film.titre"></a>,
+      année : {{film.annee}},
+      <span class="state-0" *ngIf="0 == film.statut">Non vu</span>
+      <span class="state-1" *ngIf="1 == film.statut">Vu</span>
+      <span class="state-2" *ngIf="2 == film.statut">Pas sorti</span>
+    </li>
+  </ul>
+  <p>
+    Film séléctionné : {{film | json}}
+  </p>
+
+  <input [(ngModel)]="newVideo.titre"/>
+  <input [(ngModel)]="newVideo.annee"/>
+  <input [(ngModel)]="newVideo.statut"/>
+  <button (click)="createVideo()">Ajouter</button>
+  <h5>Vidéo saisie</h5>
+  <ul>
+    <li *ngFor="let video of videos">
+      Titre :{{video.titre}}
+      année : {{video.annee}},
+      <span class="state-0" *ngIf="0 == video.statut">Non vu</span>
+      <span class="state-1" *ngIf="1 == video.statut">Vu</span>
+      <span class="state-2" *ngIf="2 == video.statut">Pas sorti</span>
+    </li>
+  </ul>
+</ion-content>
+<style>
+  .state-0{    color:red;  }
+  .state-1{    color:green;  }
+  .state-2{    color:lightgreen;  }
+</style>
